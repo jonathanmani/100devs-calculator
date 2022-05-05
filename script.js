@@ -10,15 +10,27 @@ class Calculator{
     }
 
     appendNumber(number){
-        this.currentOperand = number;
+        if (number === '.' && this.currentOperand.includes('.')){
+            return;
+        }
+        this.currentOperand = this.currentOperand.toString() + number.toString();
     }
 
     chooseOperation(operation){
+        if (this.currentOperand == ''){
+            return;
+        }
 
+        if (this.currentOperand !== ''){
+            this.compute();
+        }
+        this.operation = operation;
+        this.currentOperand = '';
     }
 
     compute(){
-
+        let computation;
+        let prev = parseFloat(this.currentOperand)
     }
 
     updateScreen(){
@@ -42,4 +54,16 @@ numberButtons.forEach(button => {
         calc.appendNumber(button.innerText);
         calc.updateScreen();
     })
+})
+
+operationButtons.forEach(button => {
+    button.addEventListener('click', () => {
+        calc.chooseOperation(button.innerText);
+        calc.updateScreen();
+    })
+})
+
+equalButton.addEventListener('click', button =>{
+    calc.compute();
+    calc.updateScreen();
 })
