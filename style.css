@@ -14,7 +14,7 @@ body {
     display: grid;
     justify-content: center;
     align-content: center;
-    min-height: 80vh;
+    min-height: 90vh;
     max-width: 40vw;
     background-color: black;
     border-radius: 2rem;
