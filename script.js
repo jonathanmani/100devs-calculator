@@ -1,69 +1,68 @@
-class Calculator{
-    constructor(currentOperandTextElement){
-        this.currentOperandTextElement = currentOperandTextElement;
-        this.clear();
-    }
+// class Calculator{
+//     constructor(currentOperandTextElement){
+//         this.currentOperandTextElement = currentOperandTextElement;
+//         this.clear();
+//     }
 
-    clear(){
-        this.currentOperand = '';
-        this.operation = undefined;
-    }
+//     clear(){
+//         this.currentOperand = '';
+//         this.operation = undefined;
+//     }
 
-    appendNumber(number){
-        if (number === '.' && this.currentOperand.includes('.')){
-            return;
-        }
-        this.currentOperand = this.currentOperand.toString() + number.toString();
-    }
+//     appendNumber(number){
+//         if (number === '.' && this.currentOperand.includes('.')){
+//             return;
+//         }
+//         this.currentOperand = this.currentOperand.toString() + number.toString();
+//     }
 
-    chooseOperation(operation){
-        if (this.currentOperand == ''){
-            return;
-        }
+//     chooseOperation(operation){
+//         if (this.currentOperand == ''){
+//             return;
+//         }
 
-        if (this.currentOperand !== ''){
-            this.compute();
-        }
-        this.operation = operation;
-        this.currentOperand = '';
-    }
+//         if (this.currentOperand !== ''){
+//             this.compute();
+//         }
+//         this.operation = operation;
+//         this.currentOperand = '';
+//     }
 
-    compute(){
-        let computation;
-        let prev = parseFloat(this.currentOperand)
-    }
+//     compute(){
+//         let computation;
+//         let prev = parseFloat(this.currentOperand)
+//     }
 
-    updateScreen(){
-        this.currentOperandTextElement.innerText = this.currentOperand;
-    }
+//     updateScreen(){
+//         this.currentOperandTextElement.innerText = this.currentOperand;
+//     }
     
-}
+// }
 
 
+let screen = document.querySelector('.screen');
+let numberButtons = Array.from(document.querySelectorAll('.button'));
 
-const numberButtons = document.querySelectorAll('[data-numbers]')
-const operationButtons = document.querySelectorAll('[data-operation]')
-const equalButton = document.querySelector('[data-equals]')
-const currentOperandTextElement = document.querySelector('[data-current-operand]')
-const clearButton = document.querySelector('[data-clear]')
 
-const calc = new Calculator(currentOperandTextElement);
+// const operationButtons = document.querySelectorAll('[data-operation]')
+// const equalButton = document.querySelector('[data-equals]')
+// const currentOperandTextElement = document.querySelector('[data-current-operand]')
+// const clearButton = document.querySelector('[data-clear]')
 
-numberButtons.forEach(button => {
-    button.addEventListener('click', () => {
-        calc.appendNumber(button.innerText);
-        calc.updateScreen();
-    })
-})
+// const calc = new Calculator(currentOperandTextElement);
 
-operationButtons.forEach(button => {
-    button.addEventListener('click', () => {
-        calc.chooseOperation(button.innerText);
-        calc.updateScreen();
-    })
-})
+numberButtons.map(button => {
+    button.addEventListener('click', (e) => {
+        switch(e.target.innerText){
+            case 'AC':
+                screen.innerText = '';
+                break;
+            case '=':
+                screen.innerText = eval(screen.innerText);
+            default:
+                screen.innerText += e.target.innerText;
+        }
 
-equalButton.addEventListener('click', button =>{
-    calc.compute();
-    calc.updateScreen();
+        
+    });
 })
